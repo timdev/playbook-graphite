@@ -1,0 +1,6 @@
+---
+mortal_username: someuser
+
+# See: http://docs.ansible.com/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module
+mortal_password: hashedpassword
+

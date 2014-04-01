@@ -1,0 +1,8 @@
+---
+- name: Set up a monitoring server (graphite, statsd, etc) on a DigitalOcean Debian 7 style box.
+  remote_user: root
+  hosts: all
+
+  roles:
+    - bootstrap-do
+

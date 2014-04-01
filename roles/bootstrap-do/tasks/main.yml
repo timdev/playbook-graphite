@@ -1,0 +1,41 @@
+---
+- name: Set hostname
+  hostname: name={{ inventory_hostname }}
+
+- name: "Make a mortal user, named {{ mortal_username }} with sudo privies"
+  user:
+    name: "{{ mortal_username }}"
+    password: "{{ mortal_password }}"
+    groups: sudo
+    state: present
+
+- name: Run dist-upgrade to bring debian up-to-date in the world.
+  apt: upgrade=dist update_cache=yes
+
+- name: Install graphite dependencies
+  apt: pkg={{ item }} state=present
+  with_items:
+    - python2.6
+    - python-pip
+    - python-cairo
+    - python-django
+    - python-django-tagging
+    - libapache2-mod-wsgi
+    - python-twisted
+    - python-memcache
+    - python-pysqlite2
+    - python-simplejson
+    - fontconfig
+
+
+- name: pip install https://github.com/graphite-project/ceres/tarball/master
+  pip: name=https://github.com/graphite-project/ceres/tarball/master state=present
+
+- name: pip install whisper
+  pip: name=whisper state=present
+
+- name: pip install carbon
+  pip: name=carbon state=present
+
+- name: pip install graphite-web
+  pip: name=graphite-web state=present
